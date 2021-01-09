@@ -1,5 +1,4 @@
 
-
 function StepsHeader() {
     return (
         <header className="orders-steps-container">
