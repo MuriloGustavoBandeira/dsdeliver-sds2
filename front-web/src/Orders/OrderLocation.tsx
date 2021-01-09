@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import AsyncSelect from 'react-select/async';
 import { fetchLocalMapBox } from '../api';
-import { OrderLocationdata } from './Types';
+import { OrderLocationData } from './Types';
 
 
 const initialPosition = {
-    lat: -23.9338961, 
+    lat: -23.9338961,
     lng: -52.4985087
 }
 
@@ -20,39 +20,39 @@ type Place = {
 }
 
 type Props = {
-    onChangeLocation: (location: OrderLocationdata) => void;
+    onChangeLocation: (location: OrderLocationData) => void;
 }
 
-function OrdersLocation({ onChangeLocation }: Props) {
+function OrderLocation({ onChangeLocation }: Props) {
     const [address, setAddress] = useState<Place>({
         position: initialPosition
     });
 
     const loadOptions = async (inputValue: string, callback: (places: Place[]) => void) => {
         const response = await fetchLocalMapBox(inputValue);
-      
+
         const places = response.data.features.map((item: any) => {
-          return ({
-            label: item.place_name,
-            value: item.place_name,
-            position: {
-              lat: item.center[1],
-              lng: item.center[0]
-            }
-          });
+            return ({
+                label: item.place_name,
+                value: item.place_name,
+                position: {
+                    lat: item.center[1],
+                    lng: item.center[0]
+                }
+            });
         });
-      
+
         callback(places);
-      };
-      
-      const handleChangeSelect = (place: Place) => {
+    };
+
+    const handleChangeSelect = (place: Place) => {
         setAddress(place);
         onChangeLocation({
-          latitude: place.position.lat,
-          longitude: place.position.lng,
-          address: place.label!
+            latitude: place.position.lat,
+            longitude: place.position.lng,
+            address: place.label!
         });
-      };
+    };
 
     return (
         <div className="order-location-container">
@@ -68,9 +68,9 @@ function OrdersLocation({ onChangeLocation }: Props) {
                         onChange={value => handleChangeSelect(value as Place)}
                     />
                 </div>
-                <MapContainer 
+                <MapContainer
                     center={address.position}
-                    zoom={15} 
+                    zoom={15}
                     key={address.position.lat}
                     scrollWheelZoom>
                     <TileLayer
@@ -88,4 +88,4 @@ function OrdersLocation({ onChangeLocation }: Props) {
     )
 }
 
-export default OrdersLocation;
+export default OrderLocation;
