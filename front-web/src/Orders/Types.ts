@@ -12,11 +12,11 @@ export type OrderLocationdata = {
     address: String;
 }
 
-type ProductId = {
+export type ProductId = {
     id: number;
 }
 
-type OrderPayload = {
+export type OrderPayload = {
     products: ProductId[];
 } & OrderLocationdata;
 
