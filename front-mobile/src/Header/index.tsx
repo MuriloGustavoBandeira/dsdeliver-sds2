@@ -1,19 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Header } from 'react-native/Libraries/NewAppScreen';
 
-export default function App() {
+function Header() {
   return (
     <View style={styles.container}>
-      <Header />
-      <StatusBar style="auto" />lsls
+      <Text>DS Delivery</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    backgroundColor: '#DA5C5C',
+    height:90,
   },
 });
+
+export default Header; 
